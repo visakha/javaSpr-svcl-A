@@ -23,6 +23,20 @@ Resources:
           Properties:
             Path: /
             Method: get
+  GetHelloWorld:
+      Type: AWS::Serverless::Function
+      Properties:
+        Handler: com.aws.codestar.projecttemplates.handler.HelloWorldHandler2
+        Runtime: java8
+        Role:
+          Fn::ImportValue:
+            !Join ['-', [!Ref 'ProjectId', !Ref 'AWS::Region', 'LambdaTrustRole']]
+        Events:
+          GetEvent:
+            Type: Api
+            Properties:
+              Path: /hnd2
+              Method: get
 
   PostHelloWorld:
     Type: AWS::Serverless::Function
